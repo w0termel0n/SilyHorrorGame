@@ -3,10 +3,10 @@ package main
 import (
 	"github.com/hajimehoshi/ebiten/v2"
 
-	"slg/silygame/game"
+	"github.com/w0termel0n/SilyHorrorGame/silygame"
 )
 
-func (g *game.Game) Update() error {
+func (g *Game) Update() error {
 	return nil
 }
 

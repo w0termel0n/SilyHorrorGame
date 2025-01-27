@@ -1,4 +1,4 @@
-module plangs_go/slg/main
+module github.com/SilyHorrorGame
 
 go 1.23.5
 
