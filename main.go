@@ -1,3 +1,8 @@
+// the files 'go.mod' and 'go.sum' keep up with your dependencies and stuff
+//
+// 'go.mod' is required to run a go program because it also holds the path to
+// the designated module to run
+
 package main
 
 import (

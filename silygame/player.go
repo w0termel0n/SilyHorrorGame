@@ -10,12 +10,12 @@ import (
 )
 
 type Player struct {
-	game *Game
-
+	game     *Game
 	position Vector
 	sprite   *ebiten.Image
 }
 
+// creates player object which has an image and positon that can changed to move it
 func NewPlayer(game *Game, img string) *Player {
 	var sprite *ebiten.Image
 	if img == "sprite" {
@@ -40,6 +40,7 @@ func NewPlayer(game *Game, img string) *Player {
 	}
 }
 
+// adds sprite to the screen at the center
 func (p *Player) Draw(screen *ebiten.Image) {
 	bounds := p.sprite.Bounds()
 	halfW := float64(bounds.Dx()) / 2
@@ -54,6 +55,7 @@ func (p *Player) Draw(screen *ebiten.Image) {
 	screen.DrawImage(p.sprite, op)
 }
 
+// adds a hitbox with collision detection around the sprite
 func (p *Player) Collider() Rect {
 	bounds := p.sprite.Bounds()
 

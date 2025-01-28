@@ -24,6 +24,7 @@ func (r Rect) MaxY() float64 {
 	return r.Y + r.Height
 }
 
+// collision detection
 func (r Rect) Intersects(other Rect) bool {
 	return r.X <= other.MaxX() &&
 		other.X <= r.MaxX() &&

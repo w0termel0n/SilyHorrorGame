@@ -11,11 +11,12 @@ import (
 	"golang.org/x/image/font/opentype"
 )
 
+//go:embed *
 var assets embed.FS
 
-var PlayerSprite = mustLoadImage("wendiku.jpg")
+var PlayerSprite = mustLoadImage("wendiku.png")
 var EndSprite = mustLoadImage("jumpscare.png")
-var Background = mustLoadImage("bckgrnd.jpg")
+var Background = mustLoadImage("bckgrnd.png")
 
 func mustLoadImage(name string) *ebiten.Image {
 	f, err := assets.Open(name)
