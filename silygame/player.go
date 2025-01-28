@@ -1,0 +1,66 @@
+package silygame
+
+import (
+	//"math"
+	//"time"
+
+	"github.com/hajimehoshi/ebiten/v2"
+
+	"github.com/w0termel0n/SilyHorrorGame/assets"
+)
+
+type Player struct {
+	game *Game
+
+	position Vector
+	sprite   *ebiten.Image
+}
+
+func NewPlayer(game *Game, img string) *Player {
+	var sprite *ebiten.Image
+	if img == "sprite" {
+		sprite = assets.PlayerSprite
+	} else {
+		sprite = assets.EndSprite
+	}
+
+	bounds := sprite.Bounds()
+	halfW := float64(bounds.Dx()) / 2
+	halfH := float64(bounds.Dy()) / 2
+
+	pos := Vector{
+		X: screenWidth/2 - halfW,
+		Y: screenHeight/2 - halfH,
+	}
+
+	return &Player{
+		game:     game,
+		position: pos,
+		sprite:   sprite,
+	}
+}
+
+func (p *Player) Draw(screen *ebiten.Image) {
+	bounds := p.sprite.Bounds()
+	halfW := float64(bounds.Dx()) / 2
+	halfH := float64(bounds.Dy()) / 2
+
+	op := &ebiten.DrawImageOptions{}
+	op.GeoM.Translate(-halfW, -halfH)
+	op.GeoM.Translate(halfW, halfH)
+
+	op.GeoM.Translate(p.position.X, p.position.Y)
+
+	screen.DrawImage(p.sprite, op)
+}
+
+func (p *Player) Collider() Rect {
+	bounds := p.sprite.Bounds()
+
+	return NewRect(
+		p.position.X,
+		p.position.Y,
+		float64(bounds.Dx()),
+		float64(bounds.Dy()),
+	)
+}
