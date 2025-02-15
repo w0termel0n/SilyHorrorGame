@@ -1,4 +1,4 @@
-package main
+package assets
 
 import (
 	"image"
@@ -28,36 +28,35 @@ func (g *Game) Update() error {
 }
 
 func (g *Game) Draw(screen *ebiten.Image) {
-    if len(frames) == 0 {
-        return
-    }
+	if len(frames) == 0 {
+		return
+	}
 
-    screen.Fill(color.White) // Set background to white
+	screen.Fill(color.White) // Set background to white
 
-    i := (g.count / frameDelay) % len(frames) // Cycle through frames
-    img := frames[i]
+	i := (g.count / frameDelay) % len(frames) // Cycle through frames
+	img := frames[i]
 
-    // Get the original size of the image
-    imgWidth, imgHeight := img.Bounds().Dx(), img.Bounds().Dy()
+	// Get the original size of the image
+	imgWidth, imgHeight := img.Bounds().Dx(), img.Bounds().Dy()
 
-    // Calculate scaling factors
-    scaleX := float64(screenWidth) / float64(imgWidth)
-    scaleY := float64(screenHeight) / float64(imgHeight)
+	// Calculate scaling factors
+	scaleX := float64(screenWidth) / float64(imgWidth)
+	scaleY := float64(screenHeight) / float64(imgHeight)
 
-    // Keep the aspect ratio by taking the smaller scale factor
-    scale := scaleX
-    if scaleY < scaleX {
-        scale = scaleY
-    }
+	// Keep the aspect ratio by taking the smaller scale factor
+	scale := scaleX
+	if scaleY < scaleX {
+		scale = scaleY
+	}
 
-    op := &ebiten.DrawImageOptions{}
-    op.GeoM.Scale(scale, scale) // Scale the image
-    op.GeoM.Translate(-float64(imgWidth)*scale/2, -float64(imgHeight)*scale/2) // Center
-    op.GeoM.Translate(screenWidth/2, screenHeight/2) // Move to screen center
+	op := &ebiten.DrawImageOptions{}
+	op.GeoM.Scale(scale, scale)                                                // Scale the image
+	op.GeoM.Translate(-float64(imgWidth)*scale/2, -float64(imgHeight)*scale/2) // Center
+	op.GeoM.Translate(screenWidth/2, screenHeight/2)                           // Move to screen center
 
-    screen.DrawImage(img, op)
+	screen.DrawImage(img, op)
 }
-
 
 // ✅ Implement missing Layout method
 func (g *Game) Layout(outsideWidth, outsideHeight int) (int, int) {

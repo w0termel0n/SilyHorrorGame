@@ -77,7 +77,7 @@ func (g *Game) Update() error {
 
 // the RunGame func also runs this every tick
 func (g *Game) Draw(screen *ebiten.Image) {
-	screen.DrawImage(assets.Background, nil)
+	screen.DrawImage(assets.Background, nil) // change assets.Background to (whatever the room var is).background
 	g.player.Draw(screen)
 }
 
